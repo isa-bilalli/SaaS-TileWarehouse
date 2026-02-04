@@ -1,0 +1,69 @@
+CREATE DATABASE IF NOT EXISTS arta-commerce;
+
+USE arta-commerce;
+
+CREATE TABLE IF NOT EXISTS Puntori(
+    puntoriID INT AUTO_INCREMENT PRIMARY KEY,
+    emriMbiemri VARCHAR(50) NOT NULL    
+);
+
+CREATE TABLE IF NOT EXISTS Klienti(
+    klientiID INT AUTO_INCREMENT PRIMARY KEY,
+    emriMbiemri VARCHAR(50) NOT NULL,
+    telefoni VARCHAR(50) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS Produkt(
+    produktID INT AUTO_INCREMENT PRIMARY KEY,
+    emriProduktit VARCHAR(100) NOT NULL,
+    cmimi DECIMAL(10,2) NOT NULL,
+    sasia INT NOT NULL
+);
+
+CREATE  TABLE IF NOT EXISTS Pllaka(
+    produktID INT PRIMARY KEY,
+    gjatesia INT NOT NULL,
+    gjeresia INT NOT NULL,
+    siperfaqja DECIMAL(10,2) AS (gjatesia * gjeresia) STORED,
+    pllakaNeKuti INT NOT NULL,
+    FOREIGN KEY(produktID) REFERENCES Produkt(produktID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Fatura(
+    faturaID INT AUTO_INCREMENT PRIMARY KEY,
+    shumaPaguar DECIMAL(10,2) NOT NULL,
+    totali DECIMAL (10,2) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    klientiID INT NOT NULL,
+    FOREIGN KEY(klientiID) REFERENCES Klienti(klientiID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ProduktiFatura(
+    produktiFaturaID INT AUTO_INCREMENT PRIMARY KEY,
+    sasia INT NOT NULL,
+    cmimiPer DECIMAL(10,2) NOT NULL,
+    cmimiTotal DECIMAL(10,2) AS (sasia * cmimiPer) STORED,
+    produktID INT NOT NULL,
+    faturaID INT NOT NULL,
+    FOREIGN KEY (produktID) REFERENCES Produkt(produktID) ON DELETE CASCADE,
+    FOREIGN KEY (faturaID) REFERENCES Fatura(faturaID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Demet(
+    DemeID INT AUTO_INCREMENT PRIMARY KEY,
+    produktID INT NOT NULL,
+    sasiaDemtuar INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    puntoriID INT NOT NULL,
+    FOREIGN KEY (puntoriID) REFERENCES Puntori(puntoriID) ON DELETE CASCADE,
+    FOREIGN KEY (produktID) REFERENCES Produkt(produktID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Pagesa(
+    pagesaID INT AUTO_INCREMENT PRIMARY KEY,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    shumaPaguar DECIMAL(10,2) NOT NULL,
+    faturaID INT NOT NULL,
+    FOREIGN KEY (faturaID) REFERENCES Fatura(faturaID) ON DELETE CASCADE
+);

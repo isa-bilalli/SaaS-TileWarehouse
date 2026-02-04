@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { registerAllHandlers } from './handlers/index.js';
+import { initializeDatabase, closeDatabase } from './db/db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,4 +31,19 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+// Initialize database when app is ready
+app.whenReady().then(async () => {
+  try {
+    await initializeDatabase();
+    createWindow();
+  } catch (error) {
+    console.error('Failed to initialize database:', error);
+    // Still create window even if DB fails, but log the error
+    createWindow();
+  }
+});
+
+// Close database connections when app quits
+app.on('before-quit', async () => {
+  await closeDatabase();
+});
