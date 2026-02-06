@@ -1,6 +1,9 @@
+import Navbar from "../components/Navbar";
+
 function ReportBroken(){
     return(
         <>
+            <Navbar />
         </>
     )
 }

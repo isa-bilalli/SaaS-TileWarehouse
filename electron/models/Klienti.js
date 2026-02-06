@@ -3,9 +3,9 @@ import { getPool } from '../db/db.js';
 class Klienti{
     static async Create(KlientiData){
         const {emriMbiemri, telefoni} = KlientiData;
-        const query = `INSERT INTO Klienti (emriMbiemri, telefoni) VALUES (?, ?)`
+        const query = `INSERT INTO Klienti (emriMbiemri,searchName, telefoni) VALUES (?, ?, ?)`
         const pool = getPool();
-        const [result] = await pool.execute(query, [emriMbiemri,telefoni]);
+        const [result] = await pool.execute(query, [emriMbiemri, emriMbiemri.toLowerCase(), telefoni]);
         return result.insertId;
     }
     static async findById(klientiID){

@@ -1,7 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
-  ping: async () => ipcRenderer.invoke('ping'),
   registerPuntori: async (formData) => ipcRenderer.invoke('registerPuntori', formData),
-  getAllPuntor: async() => ipcRenderer.invoke('getAllPuntor')
+  getAllPuntor: async() => ipcRenderer.invoke('getAllPuntor'),
+  addPllake: async (formData) => ipcRenderer.invoke('addPllake', formData),
+  addProdukt: async (formData) => ipcRenderer.invoke('addProdukt', formData),
+  getTodayProdukt: async () => ipcRenderer.invoke('getTodayProdukt')
 });

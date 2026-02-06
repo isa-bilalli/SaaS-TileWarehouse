@@ -1,3 +1,5 @@
+import Navbar from "../components/Navbar";
+
 function GenerateReport(){
     return(
         <>

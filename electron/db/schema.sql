@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS Puntori(
 CREATE TABLE IF NOT EXISTS Klienti(
     klientiID INT AUTO_INCREMENT PRIMARY KEY,
     emriMbiemri VARCHAR(50) NOT NULL,
+    searchName VARCHAR(50) NOT NULL,
     telefoni VARCHAR(50) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -17,14 +18,16 @@ CREATE TABLE IF NOT EXISTS Klienti(
 CREATE TABLE IF NOT EXISTS Produkt(
     produktID INT AUTO_INCREMENT PRIMARY KEY,
     emriProduktit VARCHAR(100) NOT NULL,
+    searchName VARCHAR(100) NOT NULL,
     cmimi DECIMAL(10,2) NOT NULL,
-    sasia INT NOT NULL
+    sasia INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE  TABLE IF NOT EXISTS Pllaka(
     produktID INT PRIMARY KEY,
-    gjatesia INT NOT NULL,
-    gjeresia INT NOT NULL,
+    gjatesia DECIMAL(10,2) NOT NULL,
+    gjeresia DECIMAL(10,2) NOT NULL,
     siperfaqja DECIMAL(10,2) AS (gjatesia * gjeresia) STORED,
     pllakaNeKuti INT NOT NULL,
     FOREIGN KEY(produktID) REFERENCES Produkt(produktID) ON DELETE CASCADE

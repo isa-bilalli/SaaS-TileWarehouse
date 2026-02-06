@@ -62,7 +62,7 @@ function LandingPage(){
                     ))
                 )}
                 <form className="mt-2 flex flex-col" onSubmit={HandleSubmit}>
-                    <input type="text" name="emriMbiemri" className="bg-gray-700 border p-3 rounded-xl border-white text-white" placeholder="Shkruaje emrin e puntorit!" onChange={HandleChange}></input>
+                    <input type="text" name="emriMbiemri" value={formData.emriMbiemri} className="bg-gray-700 border p-3 rounded-xl border-white text-white" placeholder="Shkruaje emrin e puntorit!" onChange={HandleChange}></input>
                     <button type='submit' className="mt-4 p-1 bg-gray-700 font-bold text-xl rounded-xl border border-white hover:scale-102 transition-duration-500">Shto</button>
                     <h1 className="text-red-500 mt-2">{Error}</h1>
                 </form>  
