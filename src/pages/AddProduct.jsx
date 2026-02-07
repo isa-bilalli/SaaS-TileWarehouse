@@ -126,28 +126,28 @@ function AddProduct(){
             <Navbar />
             <form className="m-5 bg-white p-3 rounded-xl" onSubmit={HandleSubmit}>
                 <div className="flex flex-row justify-evenly font-semibold">
-                    <button type="button" className={`flex-1 p-2 ${tile ? "rounded-br-lg bg-gray-100":"bg-white"}`} onClick={() => setTile(false)}>
+                    <button type="button" className={`flex-1 p-2 select-none ${tile ? "rounded-br-lg bg-gray-100":"bg-white"}`} onClick={() => setTile(false)}>
                         Produkt Normal
                     </button>
-                    <button type="button" className={`flex-1 p-2 ${tile ? "bg-white":"rounded-bl-lg bg-gray-100"}`} onClick={() => setTile(true)}>
+                    <button type="button" className={`flex-1 p-2 select-none ${tile ? "bg-white":"rounded-bl-lg bg-gray-100"}`} onClick={() => setTile(true)}>
                         Pllake
                     </button>
                 </div>
                 {!tile &&
                     <div className="flex justify-between">
-                        <div>
+                        <div className="select-none">
                             <input type="text" placeholder="Emri i Produktit" name="emriProduktit" value={productData.emriProduktit} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" onChange={HandleChange}></input>
                             <input type="number" placeholder="Cmimi" name="cmimi" value={productData.cmimi === 0 ? '' : productData.cmimi} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="0.01" min="0" onChange={HandleChange}></input>
                             <input type="number" placeholder="Sasia e gatshme" name="sasia" value={productData.sasia === 0 ? '' : productData.sasia} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>
                         </div>
                         <div>
-                            <button type="submit" className="m-4 rounded-lg bg-gray-800 text-white p-2 active:scale-98" disabled={isSubmitting}>+ Shto Produktin</button>
+                            <button type="submit" className="select-none m-4 rounded-lg bg-gray-800 text-white p-2 active:scale-98" disabled={isSubmitting}>+ Shto Produktin</button>
                         </div>
                     </div>
                 }
                 {tile &&
                     <div className="flex justify-between">
-                        <div>
+                        <div className="select-none">
                             <input type="text" placeholder="Emri i Pllakes" name="emriProduktit" value={tileData.emriProduktit} className="bg-gray-100 m-2 mt-4 p-2 rounded-lg" onChange={HandleChange}></input>
                             <input type="number" placeholder="Cmimi per Kuti" name="cmimi" value={tileData.cmimi === 0 ? '' : tileData.cmimi} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="0.01" min="0" onChange={HandleChange}></input>
                             <input type="number" placeholder="Kuti te gatshme" name="sasia" value={tileData.sasia === 0 ? '' : tileData.sasia} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>
@@ -156,13 +156,13 @@ function AddProduct(){
                             <input type="number" placeholder="Pllaka ne Kuti" name="pllakaNeKuti" value={tileData.pllakaNeKuti === 0 ? '' : tileData.pllakaNeKuti} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>
                         </div>
                         <div>
-                            <button type="submit" className="m-4 rounded-lg bg-gray-800 text-white p-2 active:scale-98" disabled={isSubmitting}>+ Shto Produktin</button>
+                            <button type="submit" className="select-none m-4 rounded-lg bg-gray-800 text-white p-2 active:scale-98" disabled={isSubmitting}>+ Shto Produktin</button>
                         </div>
                     </div>
                     }
                     <h1 className="font-semibold text-center min-h-6 text-green-500">{submitMessage}</h1>
                 </form>
-            <div className="ml-5 mr-5 mb-5 bg-white p-3 rounded-xl flex-1 overflow-auto">
+            <div className="ml-5 mr-5 mb-5 bg-white p-3 rounded-xl flex-1 overflow-auto select-none">
                 <p className="text-center font-semibold mb-3">Produktet e regjistruara sot</p>
                 {products.length === 0 ? (
                     <p className="text-center text-gray-500">Nuk ka produkte te regjistruara sot</p>

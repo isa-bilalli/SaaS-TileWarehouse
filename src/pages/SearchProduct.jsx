@@ -241,7 +241,7 @@ function SearchProduct(){
                 ) : (
                     <div className="space-y-2">
                         {searchResult.map((produkt) => (
-                            <div key={produkt.produktID} className="bg-gray-50 p-1 rounded-lg border border-gray-200">
+                            <div key={produkt.produktID} className="bg-gray-50 p-1 rounded-lg border border-gray-200 select-none">
                                 <div className="flex justify-between items-center">
                                     <div className="ml-1">
                                         <p className="font-semibold">{produkt.emriProduktit}</p>
@@ -264,8 +264,8 @@ function SearchProduct(){
             {isEditing && (isTile ? ((
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-100 opacity-90 flex justify-center items-center z-50">
                     <form className="bg-white rounded-xl w-125 flex-col text-center h-105" onSubmit={handleSubmit}>
-                        <h2 className="font-bold text-lg pt-4 mb-5">Ndrysho produktin</h2>
-                        <div className="flex flex-row justify-evenly mb-5">
+                        <h2 className="font-bold text-lg pt-4 mb-5 select-none">Ndrysho produktin</h2>
+                        <div className="flex flex-row justify-evenly mb-5 select-none">
                             <div className="ml-4">
                                 <h2>Emri i Pllakes</h2>
                                 <input type="text" placeholder="Emri i Pllakes" name="emriProduktit" value={tileData.emriProduktit} className="bg-gray-100 m-2 p-2 rounded-lg" onChange={handleInputChange} required></input>
@@ -292,7 +292,7 @@ function SearchProduct(){
                 </div>
             )):(
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-100 opacity-90 flex justify-center items-center z-50">
-                    <form className="bg-white rounded-xl max-w-8l w-75 flex-col text-center h-105" onSubmit={handleSubmit}>
+                    <form className="bg-white rounded-xl max-w-8l w-75 flex-col text-center h-105 select-none" onSubmit={handleSubmit}>
                         <h2 className="font-bold text-lg pt-4 mb-5">Ndrysho produktin</h2>
                         <p className="mt-1">Emri i Produktit</p>
                         <input type="text" placeholder="Emri i Produktit" name="emriProduktit" value={productData.emriProduktit} className="bg-gray-100 p-2 m-2 rounded-lg" onChange={handleInputChange} required></input>
