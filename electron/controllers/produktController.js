@@ -1,6 +1,6 @@
 import Product from "../models/Produkt.js";
 
-export async function addProdukt(formData){
+export async function addProduct(formData){
     try{
         const dup = await Product.egziston(formData);
         if(dup){
@@ -18,11 +18,40 @@ export async function addProdukt(formData){
     }
 }
 
-export async function getTodayProdukt(){
+export async function getTodayProduct(){
     try{
         const rows = await Product.getToday();
         return rows;
     }catch(err){
+        throw new Error(err);
+    }
+}
+
+export async function searchProduct(data){
+    try{
+        const rows = await Product.searchProduct(data);
+        return rows;
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
+export async function deleteProduct(data){
+    try{
+        const res = await Product.deleteProduct(data)
+        return res;
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
+export async function editProduct(formData){
+    try{
+        const res = await Product.editProduct(formData);
+        return res;
+    }
+    catch(err){
+        console.log('editProduct controller error:', err); // Debug log
         throw new Error(err);
     }
 }

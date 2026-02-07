@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
-import { addProdukt, addPllake, getTodayProdukt } from "../services/electronApi";
+import { addProduct, addPllake, getTodayProduct } from "../services/electronApi";
 
 function AddProduct(){
     const [tile, setTile] = useState(false);
@@ -22,7 +22,7 @@ function AddProduct(){
     const [products, setProducts] = useState([]);
     const loadTodayProducts = async () => {
         try {
-            const rows = await getTodayProdukt();
+            const rows = await getTodayProduct();
             setProducts(rows || []);
         } catch (err) {
             console.error('Error loading today products:', err);
@@ -78,7 +78,7 @@ function AddProduct(){
                 }
                 result = await addPllake(payload);
             }else if(!tile){
-                result = await addProdukt(payload);
+                result = await addProduct(payload);
             }
             
             // Check if result is null (duplicate detected)
@@ -149,7 +149,7 @@ function AddProduct(){
                     <div className="flex justify-between">
                         <div>
                             <input type="text" placeholder="Emri i Pllakes" name="emriProduktit" value={tileData.emriProduktit} className="bg-gray-100 m-2 mt-4 p-2 rounded-lg" onChange={HandleChange}></input>
-                            <input type="number" placeholder="Cmimi" name="cmimi" value={tileData.cmimi === 0 ? '' : tileData.cmimi} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="0.01" min="0" onChange={HandleChange}></input>
+                            <input type="number" placeholder="Cmimi per Kuti" name="cmimi" value={tileData.cmimi === 0 ? '' : tileData.cmimi} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="0.01" min="0" onChange={HandleChange}></input>
                             <input type="number" placeholder="Kuti te gatshme" name="sasia" value={tileData.sasia === 0 ? '' : tileData.sasia} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>
                             <input type="number" placeholder="Gjatesia (CM)" name="gjatesia" value={tileData.gjatesia === 0 ? '' : tileData.gjatesia} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>
                             <input type="number" placeholder="Gjeresia (CM)" name="gjeresia" value={tileData.gjeresia === 0 ? '' : tileData.gjeresia} className="bg-gray-100 p-2 m-2 mt-4 rounded-lg" step="1" min="0" onChange={HandleChange}></input>

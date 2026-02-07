@@ -1,15 +1,33 @@
 import { ipcMain } from "electron";
-import { addProdukt, getTodayProdukt } from "../controllers/produktController.js";
+import { addProduct, getTodayProduct, searchProduct as searchProductController, deleteProduct, editProduct } from "../controllers/produktController.js";
 
 
-export async function addProduktHandler(){
-    ipcMain.handle('addProdukt', async (event, formData) =>{
-        return await addProdukt(formData);
+export async function addProductHandler(){
+    ipcMain.handle('addProduct', async (event, formData) =>{
+        return await addProduct(formData);
     })
 }
 
-export async function getTodayProduktHandler(){
-    ipcMain.handle('getTodayProdukt', async ()=>{
-        return await getTodayProdukt();
+export async function getTodayProductHandler(){
+    ipcMain.handle('getTodayProduct', async ()=>{
+        return await getTodayProduct();
+    })
+}
+
+export async function searchProductHandler(){
+    ipcMain.handle('searchProduct', async (event, data) => {
+        return await searchProductController(data);
+    })
+}
+
+export async function deleteProductHandler(){
+    ipcMain.handle('deleteProduct', async(event, data) =>{
+        return await deleteProduct(data);
+    })
+}
+
+export async function editProductHandler(){
+    ipcMain.handle('editProduct', async(event, formData) => {
+        return await editProduct(formData);
     })
 }

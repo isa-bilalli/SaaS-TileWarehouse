@@ -27,11 +27,42 @@ class Product{
     }
     static async getToday() {
         const pool = getPool();
-        // Use MySQL's DATE() function to compare only the date part
-        // This is more reliable and handles timezone issues better
         const query = `SELECT * FROM Produkt WHERE DATE(createdAt) = CURDATE()`;
         const [rows] = await pool.execute(query);
         return rows;
+    }
+    static async searchProduct(data){
+        if(!data || typeof data !== 'string' || data.trim().length === 0){
+            return [];
+        }
+        const query = `SELECT * FROM Produkt WHERE emriProduktit LIKE ? OR searchName LIKE ?`;
+        const pool = getPool();
+        const search = `%${data}%`;
+        const searchLower = `%${data.toLowerCase()}%`;
+        const [rows] = await pool.execute(query, [search, searchLower]);
+        return rows;        
+    }
+    static async deleteProduct(data){
+        const query = `DELETE FROM Produkt WHERE produktID = ?`;
+        const pool = getPool();
+        const [res] = await pool.execute(query, [data]);
+        return res;
+    }
+    static async editProduct(formData){
+        const { produktID, emriProduktit, cmimi, sasia} = formData;
+        if(emriProduktit === undefined || emriProduktit === null){
+            throw new Error('emriProduktit is required');
+        }
+        if(typeof emriProduktit !== 'string'){
+            throw new Error(`emriProduktit must be a string, got ${typeof emriProduktit}`);
+        }
+        if(emriProduktit.trim() === ''){
+            throw new Error('emriProduktit cannot be empty');
+        }
+        const query = `UPDATE Produkt SET emriProduktit = ?, searchName = ?, cmimi = ?, sasia = ? WHERE produktID = ?`
+        const pool = getPool();
+        const res = await pool.execute(query,[emriProduktit, emriProduktit.toLowerCase(), cmimi, sasia, produktID])
+        return res;
     }
 }
 

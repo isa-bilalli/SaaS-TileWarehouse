@@ -51,7 +51,7 @@ function LandingPage(){
             <div className="bg-gray-800 p-4 pr-10 pl-10"> 
                 <h1 className="mb-4"><span className="text-5xl leading-none font-bold">ARTA</span><br/><span className="text-2xl font-bold">COMMERCE</span></h1>
                 {puntoret.length === 0 ? (
-                    <div className="text-center py-4 text-gray-400">No workers found. Add one below.</div>
+                    <div className="text-center py-4 text-gray-400">Nuk ka puntore te regjistruar</div>
                 ) : (
                     puntoret.map((puntori) => (
                         <EmployeeCard 
