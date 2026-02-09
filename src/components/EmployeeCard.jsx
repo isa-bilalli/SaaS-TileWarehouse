@@ -14,7 +14,7 @@ function EmployeeCard(props){
     return(
         <div 
             onClick={handleClick}
-            className="bg-gray-700 flex mb-2 flex-row items-center justify-between rounded-xl border border-white cursor-pointer hover:bg-gray-600 transition-colors"
+            className="bg-gray-700 flex mb-2 flex-row items-center justify-between rounded-xl border border-white cursor-pointer hover:bg-gray-600 transition-colors active:scale-95"
         >
             <h1 className='text-2xl pl-5'>{props.name}</h1>
             <img src={Forward} className='scale-40'/>

@@ -11,5 +11,10 @@ contextBridge.exposeInMainWorld('api', {
   isTile: async(data) => ipcRenderer.invoke('isTile', data),
   editProduct: async (formData) => ipcRenderer.invoke('editProduct', formData),
   getTileData: async(data) => ipcRenderer.invoke('getTileData', data),
-  editTile: async(formData) => ipcRenderer.invoke('editTile', formData)
+  editTile: async(formData) => ipcRenderer.invoke('editTile', formData),
+  addClient: async(formData)=> ipcRenderer.invoke('addClient', formData),
+  searchClient: async(data) => ipcRenderer.invoke('searchClient', data),
+  addInvoice: async(formData) => ipcRenderer.invoke('addInvoice', formData),
+  printToPDF: async(htmlContent, options) => ipcRenderer.invoke('printToPDF', htmlContent, options),
+  savePDF: async(pdfBuffer, filename) => ipcRenderer.invoke('savePDF', pdfBuffer, filename)
 });

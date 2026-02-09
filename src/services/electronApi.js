@@ -52,3 +52,28 @@ export async function editTile(formData){
     const res = await window.api.editTile(formData);
     return res;
 }
+
+export async function addClient(formData){
+    const res = await window.api.addClient(formData);
+    return res;
+}
+
+export async function searchClient(data){
+    const rows = await window.api.searchClient(data);
+    return rows;
+}
+
+export async function addInvoice(formData){
+    const res = await window.api.addInvoice(formData);
+    return res;
+}
+
+export async function printToPDF(htmlContent, options){
+    const pdfBuffer = await window.api.printToPDF(htmlContent, options);
+    return pdfBuffer;
+}
+
+export async function savePDF(pdfBuffer, filename){
+    const res = await window.api.savePDF(pdfBuffer, filename);
+    return res;
+}

@@ -36,20 +36,27 @@ CREATE  TABLE IF NOT EXISTS Pllaka(
 CREATE TABLE IF NOT EXISTS Fatura(
     faturaID INT AUTO_INCREMENT PRIMARY KEY,
     shumaPaguar DECIMAL(10,2) NOT NULL,
-    totali DECIMAL (10,2) NOT NULL,
+    totaliPaZbritje DECIMAL(10,2) NOT NULL,
+    zbritja DECIMAL(10,2) NOT NULL,
+    totali DECIMAL (10,2) AS (totaliPaZbritje - zbritja) STORED,
+    borxhi DECIMAL(10,2) AS (totaliPaZbritje - zbritja - shumaPaguar) STORED,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    klientiID INT NOT NULL,
-    FOREIGN KEY(klientiID) REFERENCES Klienti(klientiID) ON DELETE CASCADE
+    puntoriID INT NOT NULL,
+    klientiID INT,
+    FOREIGN KEY(klientiID) REFERENCES Klienti(klientiID) ON DELETE CASCADE,
+    FOREIGN KEY(puntoriID) REFERENCES Puntori(puntoriID)
 );
 
 CREATE TABLE IF NOT EXISTS ProduktiFatura(
     produktiFaturaID INT AUTO_INCREMENT PRIMARY KEY,
+    NrList INT NOT NULL,
     sasia INT NOT NULL,
-    cmimiPer DECIMAL(10,2) NOT NULL,
-    cmimiTotal DECIMAL(10,2) AS (sasia * cmimiPer) STORED,
+    cmimiNjesi DECIMAL(10,2) NOT NULL,
+    cmimiTotal DECIMAL(10,2) NOT NULL,
+    njesiaMatese VARCHAR(20) NOT NULL,
     produktID INT NOT NULL,
     faturaID INT NOT NULL,
-    FOREIGN KEY (produktID) REFERENCES Produkt(produktID) ON DELETE CASCADE,
+    FOREIGN KEY (produktID) REFERENCES Produkt(produktID),
     FOREIGN KEY (faturaID) REFERENCES Fatura(faturaID) ON DELETE CASCADE
 );
 

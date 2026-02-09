@@ -64,6 +64,15 @@ class Product{
         const res = await pool.execute(query,[emriProduktit, emriProduktit.toLowerCase(), cmimi, sasia, produktID])
         return res;
     }
+    static async reduceStock(produktID, quantity, connection = null){
+        const query = `UPDATE Produkt SET sasia = sasia - ? WHERE produktID = ? AND sasia >= ?`;
+        const pool = connection || getPool();
+        const [result] = await pool.execute(query, [quantity, produktID, quantity]);
+        if(result.affectedRows === 0){
+            throw new Error(`Insufficient stock for product ${produktID}`);
+        }
+        return result;
+    }
 }
 
 export default Product;

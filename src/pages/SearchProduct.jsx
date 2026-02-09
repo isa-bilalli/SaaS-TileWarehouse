@@ -1,9 +1,8 @@
 import Navbar from "../components/Navbar";
 import { useState, useEffect, useRef } from "react";
-import { searchProduct, isTile as isTileAPI, editProduct, getTileData, editTile } from "../services/electronApi";
+import { searchProduct, isTile as isTileAPI, editProduct, getTileData, editTile, deleteProduct as deleteProductAPI } from "../services/electronApi";
 import Edit from '../assets/Edit.svg';
 import Delete from '../assets/Delete.svg';
-import { deleteProduct as deleteProductAPI } from "../services/electronApi";
 
 function SearchProduct(){
     const [searchParameter, setSearchParameter] = useState('');
@@ -302,7 +301,7 @@ function SearchProduct(){
                         <input type="number" placeholder="Sasia e gatshme" name="sasia" value={productData.sasia === 0 ? '' : productData.sasia} className="bg-gray-100 p-2 m-2 rounded-lg" step="1" min="0" onChange={handleInputChange} required></input>
                         <h2 className="font-semibold">{modalMessage}</h2>
                         <div className="flex flex-row justify-evenly mt-4 mb-5">
-                            <button className="bg-gray-800 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" type="button" onClick={() =>{setIsEditing(false)}}>Cancel</button>
+                            <button className="bg-gray-800 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" type="button" onClick={() =>{setIsEditing(false)}}>Anulo</button>
                             <button className="bg-green-600 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" type="submit" disabled={isSubmitting}>Ndrysho</button>
                         </div>
                     </form>
@@ -314,8 +313,8 @@ function SearchProduct(){
                         <h2 className="font-bold text-lg pt-4 mb-5">Konfirmo Fshirjen</h2>
                         <p className="mb-5 px-5">A je i sigurt qe te fshish produktin ?</p>
                         <div className="flex flex-row justify-evenly mb-3">
-                            <button className="bg-gray-800 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" type="button" onClick={() =>{setIsDeleting(false)}}>Cancel</button>
-                            <button className="bg-red-600 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" onClick={deleteProduct}>Delete</button>
+                            <button className="bg-gray-800 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" type="button" onClick={() =>{setIsDeleting(false)}}>Anulo</button>
+                            <button className="bg-red-600 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white" onClick={deleteProduct}>Fshi</button>
                         </div>
                         <h2 className="font-semibold">{modalMessage}</h2>
                     </div>

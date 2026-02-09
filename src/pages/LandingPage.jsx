@@ -48,7 +48,7 @@ function LandingPage(){
     }
     return(
         <div className="flex justify-center items-center h-screen text-center text-white bg-gray-900">
-            <div className="bg-gray-800 p-4 pr-10 pl-10"> 
+            <div className="bg-gray-800 p-4 pr-10 pl-10 rounded-xl border border-white"> 
                 <h1 className="mb-4 select-none"><span className="text-5xl leading-none font-bold">ARTA</span><br/><span className="text-2xl font-bold">COMMERCE</span></h1>
                 {puntoret.length === 0 ? (
                     <div className="text-center py-4 text-gray-400 select-none">Nuk ka puntore te regjistruar</div>

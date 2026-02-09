@@ -14,6 +14,17 @@ class Klienti{
         const [rows] = await pool.execute(query,[klientiID]);
         return rows[0] || null;
     }
+    static async searchClient(data){
+        if(!data || typeof data !== 'string' || data.trim().length === 0){
+            return [];
+        }
+        const query = `SELECT * FROM Klienti WHERE emriMbiemri LIKE ? OR searchName LIKE ?`
+        const pool = getPool();
+        const search = `%${data}%`;
+        const searchLower = `%${data.toLowerCase()}%`;
+        const [rows] = await pool.execute(query, [search, searchLower]);
+        return rows; 
+    }
 }
 
 export default Klienti;

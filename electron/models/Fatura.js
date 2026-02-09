@@ -1,11 +1,11 @@
 import { getPool } from "../db/db.js";
 
 class Fatura{
-    static async Create(FaturaData){
-        const {shumaPaguar, totali, klientiID} = FaturaData;
-        const query = `INSERT INTO Fatura (shumaPaguar, totali, klientiID) VALUES (?, ?, ?)`;
-        const pool = getPool();
-        const [result] = await pool.execute(query, [shumaPaguar, totali, klientiID]);
+    static async Create(FaturaData, connection = null){
+        const {shumaPaguar, totaliPaZbritje, zbritja, puntoriID, klientiID} = FaturaData;
+        const query = `INSERT INTO Fatura (shumaPaguar, totaliPaZbritje, zbritja, puntoriID, klientiID) VALUES (?, ?, ?, ?, ?)`;
+        const pool = connection || getPool();
+        const [result] = await pool.execute(query, [shumaPaguar, totaliPaZbritje, zbritja, puntoriID, klientiID]);
         return result.insertId;
     }
 }
