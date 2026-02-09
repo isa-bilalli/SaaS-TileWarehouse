@@ -56,3 +56,34 @@ export async function addInvoice(formData){
         connection.release();
     }
 }
+
+export async function searchInvoices(formData) {
+    try {
+        const { searchParameter, date } = formData;
+        const results = await Fatura.searchInvoices({
+            searchParameter: searchParameter || null,
+            date: date || null
+        });
+        return results;
+    } catch (error) {
+        throw new Error('Error searching invoices: ' + error.message);
+    }
+}
+
+export async function getProductsInvoice(faturaID){
+    try{
+        const rows = await ProduktiFatura.getProductsInvoice(faturaID);
+        return rows;
+    }catch(err){
+        throw new Error('Error getting invoice products: ' + err.message);
+    }
+}
+
+export async function getDashboardData(){
+    try{
+        const data = await Fatura.getDashboardData();
+        return data;
+    }catch(err){
+        throw new Error('Error getting dashboard data: ' + err.message);
+    }
+}

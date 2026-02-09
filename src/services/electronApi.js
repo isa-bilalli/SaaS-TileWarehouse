@@ -68,6 +68,11 @@ export async function addInvoice(formData){
     return res;
 }
 
+export async function searchInvoices(formData){
+    const rows = await window.api.searchInvoices(formData);
+    return rows;
+}
+
 export async function printToPDF(htmlContent, options){
     const pdfBuffer = await window.api.printToPDF(htmlContent, options);
     return pdfBuffer;
@@ -76,4 +81,14 @@ export async function printToPDF(htmlContent, options){
 export async function savePDF(pdfBuffer, filename){
     const res = await window.api.savePDF(pdfBuffer, filename);
     return res;
+}
+
+export async function getProductsInvoice(faturaID){
+    const rows = await window.api.getProductsInvoice(faturaID);
+    return rows;
+}
+
+export async function getDashboardData(){
+    const data = await window.api.getDashboardData();
+    return data;
 }

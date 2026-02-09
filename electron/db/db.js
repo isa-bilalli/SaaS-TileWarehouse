@@ -45,8 +45,6 @@ export async function initializeDatabase() {
     const exists = await databaseExists(connection, dbName);
     
     if (!exists) {
-      console.log('Database does not exist. Creating database and schema...');
-      
       // Create database with escaped name
       await connection.query(`CREATE DATABASE IF NOT EXISTS ${escapedDbName}`);
       
@@ -74,10 +72,6 @@ export async function initializeDatabase() {
           await connection.query(statement + ';');
         }
       }
-      
-      console.log('Database and schema created successfully');
-    } else {
-      console.log('Database already exists. Skipping schema creation.');
     }
     
     await connection.end();
@@ -91,7 +85,6 @@ export async function initializeDatabase() {
       queueLimit: 0,
     });
     
-    console.log('Database connection pool created successfully');
     return pool;
   } catch (error) {
     console.error('Error initializing database:', error);
@@ -117,7 +110,6 @@ export async function closeDatabase() {
   if (pool) {
     await pool.end();
     pool = null;
-    console.log('Database connections closed');
   }
 }
 

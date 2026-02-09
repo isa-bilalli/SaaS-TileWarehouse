@@ -15,6 +15,9 @@ contextBridge.exposeInMainWorld('api', {
   addClient: async(formData)=> ipcRenderer.invoke('addClient', formData),
   searchClient: async(data) => ipcRenderer.invoke('searchClient', data),
   addInvoice: async(formData) => ipcRenderer.invoke('addInvoice', formData),
+  searchInvoices: async(formData) => ipcRenderer.invoke('searchInvoices', formData),
   printToPDF: async(htmlContent, options) => ipcRenderer.invoke('printToPDF', htmlContent, options),
-  savePDF: async(pdfBuffer, filename) => ipcRenderer.invoke('savePDF', pdfBuffer, filename)
+  savePDF: async(pdfBuffer, filename) => ipcRenderer.invoke('savePDF', pdfBuffer, filename),
+  getProductsInvoice: async (faturaID) => ipcRenderer.invoke('getProductsInvoice', faturaID),
+  getDashboardData: async () => ipcRenderer.invoke('getDashboardData')
 });

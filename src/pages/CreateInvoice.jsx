@@ -182,7 +182,6 @@ function CreateInvoice(){
             ...prev,
             shumaPaguar:payment
         }))
-        console.log(faturaData);
     }
 
     async function handleSubmit(){
@@ -389,7 +388,7 @@ function CreateInvoice(){
                             }} className="bg-gray-800 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white m-2 cursor-pointer">Anulo</button>
                             <button type="submit" className="bg-green-600 px-4 py-2 rounded-lg hover:scale-102 active:scale-95 text-white m-2 cursor-pointer" disabled={isSubmitting}>Shto</button>
                         </div>
-                        <div className="min-h-[30px] flex items-center justify-center pb-3">
+                        <div className="min-h-7.5 flex items-center justify-center pb-3">
                             {modalMessage && (
                                 <p className={`font-semibold ${modalMessage.includes('sukses') ? 'text-green-600' : 'text-red-600'}`}>{modalMessage}</p>
                             )}

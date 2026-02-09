@@ -131,7 +131,7 @@ function SearchProduct(){
             setModalMessage('')
             setIsEditing(true);
         }catch(err){
-            console.log('Error', err)
+            setModalMessage('Error loading product data');
         }
     }
 
@@ -155,7 +155,7 @@ function SearchProduct(){
                 setModalMessage('');
             },1500)
         }catch(err){
-            console.log('Error',err);
+            setModalMessage('Error deleting product');
         }
     }
 
@@ -166,7 +166,7 @@ function SearchProduct(){
         try{
             const payload = isTileRef.current ? tileData : productData;
             if(!payload.produktID || !payload.emriProduktit){
-                console.log('Te dhenat nuk u ngarkuan ERROR');
+                setModalMessage('Te dhenat nuk u ngarkuan');
                 setIsSubmitting(false);
                 return;
             }
@@ -210,7 +210,6 @@ function SearchProduct(){
                 setIsSubmitting(false);
             },1500)
         }catch(err){
-            console.log('Error:',err)
             setModalMessage('Error: ' + (err.message || err));
             setIsSubmitting(false);
         }

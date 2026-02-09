@@ -1,5 +1,5 @@
 import { registerPuntoriHandler, getAllPuntorHandler } from './PuntoriHandler.js';
-import { addInvoiceHandler } from './faturaHandler.js';
+import { addInvoiceHandler, searchInvoicesHandler, getProductsInvoiceHandler, getDashboardDataHandler } from './faturaHandler.js';
 import { addClientHandler, searchClientHandler } from './klientiHandler.js';
 import { addPllakeHandler, editTileHandler, getTileDataHandler, isTileHandler } from './pllakeHandler.js';
 import { addProductHandler, deleteProductHandler, editProductHandler, getTodayProductHandler, searchProductHandler } from './produktHandler.js';
@@ -23,7 +23,10 @@ export function registerAllHandlers() {
   addClientHandler();
   searchClientHandler();
   addInvoiceHandler();
+  searchInvoicesHandler();
   printToPDFHandler();
   savePDFHandler();
+  getProductsInvoiceHandler();
+  getDashboardDataHandler();
 }
 

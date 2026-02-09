@@ -7,11 +7,37 @@ import Search from '../assets/Search.svg';
 import Debt from '../assets/Debt.svg';
 import Invoice from '../assets/Invoice.svg';
 import Report from '../assets/Report.svg';
+import {useEffect, useState} from 'react';
+import { getDashboardData } from '../services/electronApi.js';
 
 function Dashboard() {
-    const dummyData1 = 7;
-    const dummyData2 = 5425;
-    const dummyData3 = 3750;
+    const [data,setData] = useState({
+        faturaTeLeshuara:0,
+        shumaFaturuar:0,
+        qarkullimiDitor:0
+    })
+
+    useEffect(()=>{
+        setDashboardData()
+    }, [])
+
+    async function setDashboardData(){
+        try{
+            const {faturaTeLeshuara, shumaFaturuar, qarkullimiDitor} = await getDashboardData()
+            setData({
+                faturaTeLeshuara:faturaTeLeshuara,
+                shumaFaturuar:shumaFaturuar,
+                qarkullimiDitor:qarkullimiDitor
+            })
+        }catch(err){
+            setData({
+                faturaTeLeshuara:0,
+                shumaFaturuar:0,
+                qarkullimiDitor:0
+            })
+        }
+    }
+
     return (
         <div className='bg-gray-100 min-h-screen min-w-screen flex flex-col items-center'>
             <Navbar />
@@ -30,9 +56,9 @@ function Dashboard() {
             </div>
             <div className='bg-gray-800 mt-5 w-full max-w-4xl mx-auto text-white rounded-xl p-2 select-none'>
                 <h1 className='font-semibold text-2xl sm:text-3xl text-center pt-2'>PASQYRA DITORE</h1>
-                <p className='text-lg sm:text-xl ml-3'>Fatura te leshuara: {dummyData1}</p>
-                <p className='text-lg sm:text-xl ml-3'>Shuma e faturuar: {dummyData2}€</p>
-                <p className='text-lg sm:text-xl ml-3 pb-3'>Qarkullimi Ditor: <span className='text-[#00FF00]'>{dummyData3}€</span></p>
+                <p className='text-lg sm:text-xl ml-3'>Fatura te leshuara: {data.faturaTeLeshuara}</p>
+                <p className='text-lg sm:text-xl ml-3'>Shuma e faturuar: {data.shumaFaturuar}€</p>
+                <p className='text-lg sm:text-xl ml-3 pb-3'>Qarkullimi Ditor: <span className={`${(data.qarkullimiDitor <0 ) ? `text-red-500`:`text-[#00FF00]`}`}>{data.qarkullimiDitor}€</span></p>
             </div>
         </div>
     )

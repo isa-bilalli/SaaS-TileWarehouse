@@ -13,7 +13,6 @@ export async function addProduct(formData){
         if(err.message === 'DUPLICATE_PRODUCT'){
             throw err;
         }
-        console.log('error during product add:', err);
         throw new Error('Error gjate shtimit te produktit');
     }
 }
@@ -51,7 +50,6 @@ export async function editProduct(formData){
         return res;
     }
     catch(err){
-        console.log('editProduct controller error:', err); // Debug log
         throw new Error(err);
     }
 }
