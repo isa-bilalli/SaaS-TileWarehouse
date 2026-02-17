@@ -434,7 +434,7 @@ function CreateInvoice(){
                     </button>
                 </div>
                 {/*CREATE INVOICE SECTION */}
-                <div className="flex flex-col justify-center items-center ml-54">
+                <div className="flex flex-col justify-center items-center ml-28">
                     <button onClick={handleSubmit} disabled={isSubmitting} className="bg-gray-800 text-white cursor-pointer px-8 py-6 rounded-xl hover:scale-102 active:scale-99 transition-transform duration-100 text-4xl">Shto Fakturën</button>
                     <div className="min-h-7.5 mt-1 flex items-center justify-center">
                         {errorMsg && (

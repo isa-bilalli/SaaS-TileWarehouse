@@ -67,6 +67,19 @@ class Fatura{
             qarkullimiDitor: 0
         };
     }
+    static async getInvoicesWithDebtByID(klientiID){
+        const query = `SELECT faturaID, borxhi FROM Fatura where klientiID = ? AND borxhi > 0 ORDER BY createdAt DESC`
+        const pool = getPool();
+        const [rows] = await pool.execute(query, [klientiID]);
+        return rows;
+    }
+    static async updateTotal(formData){
+        const {shumaPaguar, faturaID} = formData;
+        const query = `UPDATE Fatura SET shumaPaguar = shumaPaguar + ? WHERE faturaID = ?;`
+        const pool = getPool();
+        const res = await pool.execute(query, [shumaPaguar,faturaID]);
+        return res;
+    }
 }
 
 export default Fatura;

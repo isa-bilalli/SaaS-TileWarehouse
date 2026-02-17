@@ -92,3 +92,18 @@ export async function getDashboardData(){
     const data = await window.api.getDashboardData();
     return data;
 }
+
+export async function getInvoicesWithDebtByID(klientiID){
+    const rows = await window.api.getInvoicesWithDebtById(klientiID);
+    return rows;
+}
+
+export async function addPayment(formData){
+    const res = await window.api.addPayment(formData);
+    return res;
+}
+
+export async function getPaymentsToday(){
+    const rows = await window.api.getPaymentsToday();
+    return rows;
+}

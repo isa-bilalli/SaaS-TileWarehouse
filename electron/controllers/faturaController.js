@@ -87,3 +87,21 @@ export async function getDashboardData(){
         throw new Error('Error getting dashboard data: ' + err.message);
     }
 }
+
+export async function getInvoicesWithDebtByID(klientiID){
+    try{
+        const rows = await Fatura.getInvoicesWithDebtByID(klientiID);
+        return rows;
+    }catch(err){
+        throw new Error('Error getting indebted invoices' + err.message);
+    }
+}
+
+export async function updateTotal(formData){
+    try{
+        const res = await Fatura.updateTotal(formData);
+        return res;
+    }catch(err){
+        throw new Error(err.message);
+    }
+}

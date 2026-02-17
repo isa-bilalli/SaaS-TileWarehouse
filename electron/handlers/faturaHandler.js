@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { addInvoice, searchInvoices, getProductsInvoice, getDashboardData } from "../controllers/faturaController.js";
+import { addInvoice, searchInvoices, getProductsInvoice, getDashboardData, getInvoicesWithDebtByID } from "../controllers/faturaController.js";
 
 export async function addInvoiceHandler(){
     ipcMain.handle('addInvoice', async(event, formData)=>{
@@ -22,5 +22,11 @@ export async function getProductsInvoiceHandler(){
 export async function getDashboardDataHandler(){
     ipcMain.handle('getDashboardData', async()=>{
         return await getDashboardData();
+    })
+}
+
+export async function getInvoicesWithDebtByIDHandler(){
+    ipcMain.handle('getInvoicesWithDebtByID', async(event, klientiID)=>{
+        return await getInvoicesWithDebtByID(klientiID);
     })
 }
