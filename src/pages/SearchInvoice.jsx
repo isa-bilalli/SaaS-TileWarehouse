@@ -19,9 +19,7 @@ function SearchInvoice(){
     }
 
     async function handleSubmit(e){
-        e.preventDefault();
-        console.log('Form submitted');
-        
+        e.preventDefault();        
         setIsSearching(true);
         setIsSubmitting(true);
         try {

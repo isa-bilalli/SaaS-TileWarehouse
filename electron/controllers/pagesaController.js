@@ -66,3 +66,16 @@ export async function addPagesa(formData){
         connection.release();
     }
 }
+
+export async function searchPagesa(formData){
+    try{
+        const { searchParameter, date } = formData;
+        const results = await Pagesa.searchPagesa({
+            searchParameter: searchParameter || null,
+            date: date || null
+        });
+        return results;
+    }catch(err){
+        throw new Error('Error searching payments: ' + err.message);
+    }
+}

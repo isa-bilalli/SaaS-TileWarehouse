@@ -23,4 +23,5 @@ contextBridge.exposeInMainWorld('api', {
   getInvoicesWithDebtById: async(klientiID) => ipcRenderer.invoke('getInvoicesWithDebtByID', klientiID),
   addPayment: async(formData) => ipcRenderer.invoke('addPayment', formData),
   getPaymentsToday: async() => ipcRenderer.invoke('getPaymentsToday'),
+  searchPagesa: async(formData) => ipcRenderer.invoke('searchPagesa', formData),
 });

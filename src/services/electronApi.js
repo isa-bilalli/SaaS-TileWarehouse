@@ -107,3 +107,8 @@ export async function getPaymentsToday(){
     const rows = await window.api.getPaymentsToday();
     return rows;
 }
+
+export async function searchPagesa(formData){
+    const rows = await window.api.searchPagesa(formData);
+    return rows;
+}

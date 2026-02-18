@@ -52,12 +52,33 @@ class Fatura{
         return rows;
     }
     static async getDashboardData(){
-        const query = `SELECT 
-            COUNT(*) AS faturaTeLeshuara,
-            COALESCE(SUM(totali), 0) AS shumaFaturuar, 
-            COALESCE(SUM(shumaPaguar), 0) AS qarkullimiDitor 
-        FROM Fatura 
-        WHERE DATE(createdAt) = CURDATE()`;
+        const query = `
+            SELECT 
+                (SELECT COUNT(*) FROM Fatura WHERE DATE(createdAt) = CURDATE()) AS faturaTeLeshuara,
+                (SELECT COALESCE(SUM(totali), 0) FROM Fatura WHERE DATE(createdAt) = CURDATE()) AS shumaFaturuar,
+                (
+                    -- All payments made today (from Pagesa table) - covers payments for any invoice
+                    SELECT COALESCE(SUM(shumaPaguar), 0) 
+                    FROM Pagesa 
+                    WHERE DATE(createdAt) = CURDATE()
+                ) + (
+                    -- Initial payments from invoices created today that haven't been recorded in Pagesa
+                    -- This is the shumaPaguar that was set at invoice creation
+                    -- We calculate it as: current shumaPaguar minus all Pagesa payments made today for those invoices
+                    -- This ensures we only count the initial payment, not payments already counted above
+                    SELECT COALESCE(SUM(
+                        GREATEST(0, f.shumaPaguar - COALESCE((
+                            SELECT SUM(p.shumaPaguar) 
+                            FROM Pagesa p 
+                            WHERE p.faturaID = f.faturaID 
+                            AND DATE(p.createdAt) = CURDATE()
+                        ), 0))
+                    ), 0)
+                    FROM Fatura f
+                    WHERE DATE(f.createdAt) = CURDATE()
+                    AND f.shumaPaguar > 0
+                ) AS qarkullimiDitor
+        `;
         const pool = getPool();
         const [rows] = await pool.execute(query);
         // Return the first row as an object
